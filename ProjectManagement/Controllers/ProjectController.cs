@@ -1,4 +1,5 @@
-﻿using Entities.Models;
+﻿using Contracts;
+using Entities.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,9 +10,9 @@ namespace ProjectManagement.Controllers
     public class ProjectController : ControllerBase
     {
         private List<Project> _projectList;
-        private ILogger<ProjectController> _logger;
+        private ILoggerManager _logger;
 
-        public ProjectController(ILogger<ProjectController> logger)
+        public ProjectController(ILoggerManager logger)
         {
             _logger = logger;
             _projectList = new List<Project>
@@ -28,11 +29,8 @@ namespace ProjectManagement.Controllers
         {
             try
             {
-                int c = 10;
-                int a = 0;
-                int d = c / a;
 
-                _logger.LogInformation("Projects.Get() has been run.");
+                _logger.LogInfo("Projects.Get() has been run.");
                 return Ok(_projectList);
             }
             catch (Exception ex)

@@ -1,4 +1,7 @@
-﻿namespace ProjectManagement.Extensions
+﻿using Contracts;
+using LoggerService;
+
+namespace ProjectManagement.Extensions
 {
     public static class ServiceExtensions
     {
@@ -7,11 +10,16 @@
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy", builder =>
-                builder.AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader()
+                    builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
                 );
             });
+        }
+
+        public static void ConfigureLoggerManager(this IServiceCollection services)
+        {
+            services.AddSingleton<ILoggerManager, LoggerManager>();
         }
     }
 }
