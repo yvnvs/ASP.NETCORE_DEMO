@@ -29,5 +29,8 @@ namespace ProjectManagement.Extensions
             services.AddDbContext<RepositoryContext>(options => options.UseSqlServer(configuration.GetConnectionString("sqlConnection"), project => project.MigrationsAssembly("ProjectManagement"))
             );
         }
+
+        public static void ConfigureRepositoryManager(this IServiceCollection services)=>
+            services.AddScoped<IRepositoryManager, RepositoryManager>();
     }
 }
