@@ -16,6 +16,7 @@ builder.Services.ConfigureCors();
 builder.Services.ConfigureLoggerManager();
 builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.ConfigureRepositoryManager();
+builder.Services.ConfigureRepositoryManager();
 
 var app = builder.Build();
 
