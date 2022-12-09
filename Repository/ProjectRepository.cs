@@ -16,14 +16,19 @@ namespace Repository
 
         public void CreateProject(Project project) => Create(project);
 
-        public void DeleteProject(Project project) => Delete( project);
+
+        public void DeleteProject(Project project) => Delete(project);
+
 
         public IEnumerable<Project> GetAllProjects(bool trackChanges) =>
             FindAll(trackChanges)
-            .OrderBy(p => p.Name)
-            .ToList();
+                .OrderBy(p => p.Name)
+                .ToList();
 
-        public Project GetProject(Guid id, bool trackChanges) =>
-            FindByCondition(p => p.Equals(id), trackChanges).SingleOrDefault();
+
+        public Project GetOneProjectById(Guid id, bool trackChanges) =>
+            FindByCondition(p => p.Id.Equals(id), trackChanges)
+                .SingleOrDefault();
+
     }
 }

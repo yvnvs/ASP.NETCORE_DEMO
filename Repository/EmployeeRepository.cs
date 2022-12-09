@@ -26,9 +26,14 @@ namespace Repository
         }
 
         public Employee GetEmployeeByProjectId(Guid projectId, Guid id, bool trackChanges) =>
-            FindByCondition(e => e.ProjectId.Equals(projectId) && e.Id.Equals(id), trackChanges).SingleOrDefault();
+            FindByCondition(e => e.ProjectId.Equals(projectId) && e.Id.Equals(id), trackChanges)
+                .SingleOrDefault();
+
 
         public IEnumerable<Employee> GetEmployeesByProjectId(Guid projectId, bool trackChanges) =>
-            FindByCondition(e => e.ProjectId.Equals(projectId),trackChanges).OrderBy(e => e.FirstName).ToList();
+            FindByCondition(e => e.ProjectId.Equals(projectId), trackChanges)
+                .OrderBy(e => e.FirstName)
+                .ToList();
+
     }
 }
