@@ -24,7 +24,13 @@ builder.Services.AddControllers()
     .AddApplicationPart(typeof(ProjectManagement.Presentation.AssemblyReference).Assembly);
 
 var app = builder.Build();
+var logger = app.Services.GetRequiredService<ILoggerManager>();
 
+if (app.Environment.IsProduction())
+{
+    app.UseHsts();
+}
+app.ConfigureExceptionHandles(logger);
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
