@@ -19,15 +19,15 @@ namespace ProjectManagement.Presentation.Controllers
         public IActionResult GetAllProjects()
         {
             var projects = _service.ProjectService.GetAllProjects(false);
-                return Ok(projects);
+            return Ok(projects);
         }
 
         [HttpGet("{id:guid}")]
         public IActionResult GetOneProjectById(Guid id)
         {
-            
+
             var project = _service.ProjectService.GetOneProjectById(id, false);
-                return Ok(project);
+            return Ok(project);
         }
     }
 }
