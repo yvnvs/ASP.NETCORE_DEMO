@@ -38,5 +38,15 @@ namespace Service
             var projetDto = _mapper.Map<ProjectDto>(project);
             return projetDto;
         }
+
+        public ProjectDto CreateOneProject(ProjectDtoForCreation projectDto)
+        {
+            var entity = _mapper.Map<Project>(projectDto); 
+            _repository.Project.CreateProject(entity);
+            _repository.Save();
+
+            //Entity -> Dto
+            return _mapper.Map<ProjectDto>(entity);
+        }
     }
 }

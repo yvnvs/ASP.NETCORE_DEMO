@@ -8,7 +8,8 @@ public class MappingProfile:Profile
 {
     public MappingProfile()
     {
-        CreateMap<Project, ProjectDto>();
+        CreateMap<Project, ProjectDto>().ReverseMap();
         CreateMap<Employee,EmployeeDto>();
+        CreateMap<ProjectDtoForCreation, Project>();
     }
 }

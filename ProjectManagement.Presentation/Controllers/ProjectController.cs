@@ -1,6 +1,7 @@
 ﻿using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
+using Shared.DataTransferObjects;
 
 namespace ProjectManagement.Presentation.Controllers
 {
@@ -22,12 +23,19 @@ namespace ProjectManagement.Presentation.Controllers
             return Ok(projects);
         }
 
-        [HttpGet("{id:guid}")]
+        [HttpGet("{id:guid}", Name = "ProjectById")]
         public IActionResult GetOneProjectById(Guid id)
         {
 
             var project = _service.ProjectService.GetOneProjectById(id, false);
             return Ok(project);
+        }
+
+        [HttpPost] //201 : CREATED
+        public IActionResult CreateOneProject([FromBody] ProjectDtoForCreation projectDto)
+        {
+            var project = _service.ProjectService.CreateOneProject(projectDto);
+            return CreatedAtRoute("ProjectById", new {id=project.Id},project);
         }
     }
 }
