@@ -1,4 +1,10 @@
 ﻿namespace Shared.DataTransferObjects;
 
-public record ProjectDto(Guid Id, string Name, string Description, string Field);
-public record EmployeeDto(Guid Id, string FirstName, string LastName, int Age, string Position);
+//[Serializable]
+public record ProjectDto
+{
+    public Guid Id { get; init; }
+    public string Name { get; init; }
+    public string Description { get; init; }
+    public string Field { get; init; }
+}
