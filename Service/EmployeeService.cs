@@ -46,6 +46,24 @@ namespace Service
 
         }
 
+        public EmployeeDto CreateEmployeeByProjectId(Guid projectId, EmployeeDtoForCreation employeeDto, bool trackChanges)
+        {
+            var project = _repository.Project.GetOneProjectById(projectId, false);
+            if (project is null)
+            {
+                throw new ProjectNotFoundException(projectId);
+            }
+            //Dto -> entity
+            var entity = _mapper.Map<Employee>(employeeDto);
+            entity.ProjectId = projectId;
+
+            //Save (EF)
+            _repository.Employee.CreateEmployeeForProject(projectId,entity);
+            _repository.Save();
+
+            return _mapper.Map<EmployeeDto>(entity);
+        }
+
         private void CheckProjectExists(Guid projectId)
         {
             var project = _repository.Project.GetOneProjectById(projectId, trackChanges: false);
